@@ -1,10 +1,9 @@
-import 'package:bytebank/screens/contact_form.dart';
+import 'package:bytebank/database/app_database.dart';
+import 'package:bytebank/models/contact.dart';
 import 'package:flutter/material.dart';
-import 'dart:async';
-import 'package:sqflite/sqflite.dart';
+import 'package:bytebank/screens/contact_form.dart';
 
 class ContactsList extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,21 +11,31 @@ class ContactsList extends StatelessWidget {
         title: Text('Contacts'),
         backgroundColor: Colors.green[900],
       ),
-      body: ListView(
-        children: [
-          Card(
-            child: ListTile(
-              title: Text(
-                'Hallef',
-                style: TextStyle(fontSize: 24.0),
-              ),
-              subtitle: Text(
-                '1000',
-                style: TextStyle(fontSize: 24.0),
-              ),
+      body: FutureBuilder<List<Contact>>(
+        initialData: [],
+        future: Future.delayed(Duration(seconds: 5)).then((value) => findAll()),
+        builder: (context, snapshot) {
+          final List<Contact> contacts = snapshot.data;
+          return ListView.builder(
+            itemBuilder: (context, index) {
+              final Contact contact = contacts[index];
+              return _ContactItem(contact);
+            },
+            itemCount: contacts.length,
+          );
+
+          /* return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                CircularProgressIndicator(),
+                Text('Loading'),
+              ],
             ),
-          ),
-        ],
+          ); */
+          
+        },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => {
@@ -41,6 +50,28 @@ class ContactsList extends StatelessWidget {
               )
         },
         child: Icon(Icons.add),
+      ),
+    );
+  }
+}
+
+class _ContactItem extends StatelessWidget {
+  final Contact contact;
+
+  _ContactItem(this.contact);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: ListTile(
+        title: Text(
+          contact.name,
+          style: TextStyle(fontSize: 24.0),
+        ),
+        subtitle: Text(
+          contact.accountNumber.toString(),
+          style: TextStyle(fontSize: 24.0),
+        ),
       ),
     );
   }
