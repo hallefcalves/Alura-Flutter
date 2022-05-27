@@ -1,8 +1,10 @@
+import 'package:bytebank/screens/transaction_feed.dart';
 import 'package:flutter/material.dart';
 import 'package:bytebank/screens/transfer_list.dart';
-import 'package:path/path.dart';
 
 class Dashboard extends StatelessWidget {
+  const Dashboard({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,21 +18,24 @@ class Dashboard extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: Image.asset('images/bytebank_logo.png'),
           ),
-          Row(
-            children: [
-              _FeatureItem(
-                'Transfer',
-                Icons.monetization_on,
-                onClick: () {
-                  _showTransferList(context);
-                },
-              ),
-              _FeatureItem(
-                'Transaction Feed',
-                Icons.description,
-                onClick: () => print('Transaction feed was clicked'),
-              ),
-            ],
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                _FeatureItem(
+                  'Transfer',
+                  Icons.monetization_on,
+                  onClick: () {
+                    _showTransferList(context);
+                  },
+                ),
+                _FeatureItem(
+                  'Transaction Feed',
+                  Icons.description,
+                  onClick: () => _showTransactionsFeed(context),
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -42,6 +47,12 @@ class Dashboard extends StatelessWidget {
       MaterialPageRoute(builder: (context) => TransferList()),
     );
   }
+
+  _showTransactionsFeed(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (context) => TransactionsList()),
+    );
+  }
 }
 
 class _FeatureItem extends StatelessWidget {
@@ -49,7 +60,12 @@ class _FeatureItem extends StatelessWidget {
   final IconData icon;
   final Function onClick;
 
-  _FeatureItem(this.name, this.icon, {@required this.onClick});
+  _FeatureItem(
+    this.name,
+    this.icon, {
+    @required this.onClick,
+  })  : assert(icon != null),
+        assert(onClick != null);
 
   @override
   Widget build(BuildContext context) {
