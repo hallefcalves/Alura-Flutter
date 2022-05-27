@@ -1,20 +1,20 @@
 import 'package:bytebank/dao/contact_dao.dart';
 import 'package:bytebank/models/contact.dart';
-import 'package:bytebank/screens/contact_form.dart';
+import 'package:bytebank/screens/transfer_form.dart';
 import 'package:flutter/material.dart';
 
-class ContactsList extends StatefulWidget {
+class TransferList extends StatefulWidget {
   @override
-  State<ContactsList> createState() => _ContactsListState();
+  State<TransferList> createState() => _TransferListState();
 }
 
-class _ContactsListState extends State<ContactsList> {
+class _TransferListState extends State<TransferList> {
   final ContactDao _dao = ContactDao();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Contacts'),
+        title: Text('Transfer'),
         backgroundColor: Colors.green[900],
       ),
       body: FutureBuilder<List<Contact>>(
@@ -54,7 +54,7 @@ class _ContactsListState extends State<ContactsList> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => ContactForm()))
+            .push(MaterialPageRoute(builder: (context) => TransferForm()))
             .then((value) => setState(() {})),
         child: Icon(Icons.add),
       ),

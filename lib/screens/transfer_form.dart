@@ -2,12 +2,12 @@ import 'package:bytebank/dao/contact_dao.dart';
 import 'package:bytebank/models/contact.dart';
 import 'package:flutter/material.dart';
 
-class ContactForm extends StatefulWidget {
+class TransferForm extends StatefulWidget {
   @override
-  State<ContactForm> createState() => _ContactFormState();
+  State<TransferForm> createState() => _TransferFormState();
 }
 
-class _ContactFormState extends State<ContactForm> {
+class _TransferFormState extends State<TransferForm> {
   final TextEditingController _nameController = TextEditingController();
 
   final TextEditingController _accountNumberController =
