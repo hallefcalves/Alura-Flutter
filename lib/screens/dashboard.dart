@@ -60,7 +60,7 @@ class _FeatureItem extends StatelessWidget {
   final IconData icon;
   final Function onClick;
 
-  _FeatureItem(
+  const _FeatureItem(
     this.name,
     this.icon, {
     @required this.onClick,
