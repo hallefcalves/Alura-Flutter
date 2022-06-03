@@ -1,6 +1,6 @@
-import 'package:bytebank/screens/transaction_feed.dart';
+import 'package:bytebank/screens/transactions_list.dart';
 import 'package:flutter/material.dart';
-import 'package:bytebank/screens/transfer_list.dart';
+import 'package:bytebank/screens/contacts_list.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({Key key}) : super(key: key);
