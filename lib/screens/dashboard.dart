@@ -26,7 +26,7 @@ class Dashboard extends StatelessWidget {
                   'Transfer',
                   Icons.monetization_on,
                   onClick: () {
-                    _showTransferList(context);
+                    _showContactsList(context);
                   },
                 ),
                 _FeatureItem(
@@ -42,9 +42,9 @@ class Dashboard extends StatelessWidget {
     );
   }
 
-  void _showTransferList(BuildContext context) {
+  void _showContactsList(BuildContext context) {
     Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => TransferList()),
+      MaterialPageRoute(builder: (context) => ContactsList()),
     );
   }
 

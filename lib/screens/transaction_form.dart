@@ -1,3 +1,4 @@
+import 'package:bytebank/http/webclients/transaction_webclient.dart';
 import 'package:bytebank/models/contact.dart';
 import 'package:bytebank/models/transaction.dart';
 import 'package:flutter/material.dart';
@@ -13,12 +14,14 @@ class TransactionForm extends StatefulWidget {
 
 class _TransactionFormState extends State<TransactionForm> {
   final TextEditingController _valueController = TextEditingController();
+  final TransactionWebClient _webClient = TransactionWebClient();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('New transaction'),
+        backgroundColor: Colors.green[900],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -62,6 +65,11 @@ class _TransactionFormState extends State<TransactionForm> {
                           double.tryParse(_valueController.text);
                       final transactionCreated =
                           Transaction(value, widget.contact);
+                      _webClient.save(transactionCreated).then((transaction) {
+                        if (transaction != null) {
+                          Navigator.pop(context);
+                        }
+                      });
                     },
                   ),
                 ),
